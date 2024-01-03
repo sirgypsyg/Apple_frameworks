@@ -14,20 +14,18 @@ struct ContentView: View {
     var body: some View {
         
         NavigationStack{
-            ScrollView{
-                LazyVGrid(columns: viewModel.columns){
+                List{
                     ForEach(MockData.frameworks){ framework in
-                        NavigationLink(value: framework){
+                        NavigationLink(destination:FrameworkDetailView(framework: framework,
+                                                            isShowingDetailView: $viewModel.isShowingDetailView)){
                             FrameworkTitleView(framework: framework)
+                                
                         }
                     }
                  }
-            }
             .navigationTitle("🍎 Frameworks")
-            .navigationDestination(for: Framework.self){ framework in
-                FrameworkDetailView(framework: framework);
-            }
         }
+        .accentColor(Color(.label))
     }
 }
 
