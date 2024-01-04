@@ -15,15 +15,21 @@ struct FrameworkDetailView: View {
     
     var body: some View {
         VStack{
-            
-            
             FrameworkTitleView(framework: framework)
             Text(framework.description)
                 .padding()
             
             Spacer()
-            AFButton(title: "Learn More",
-                     isShowingSafariView: $isShowingSafariView)
+            //AFButton(title: "Learn More",isShowingSafariView: (CUSTOM BUT) $isShowingSafariView)
+            Button{
+                isShowingSafariView = true
+            }label: {
+                Label("Learn More", systemImage: "book.fill")
+            }.frame(width: 200, height: 40)
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                .tint(Color.red)
+                .buttonBorderShape(.roundedRectangle)
             Spacer()
         }.sheet(isPresented: $isShowingSafariView, content: {
             SafariView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)
